@@ -12,18 +12,17 @@ import org.springframework.stereotype.Repository;
 
 import kz.metaphor.model.Movie;
 
- @Repository
- @Qualifier(value="dataGetter")
+@Repository
+@Qualifier(value = "dataGetter")
 public class DataGetter {
-
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection;
 
 	public List<Movie> getMovies() {
 		List<Movie> movies = new ArrayList<Movie>();
-        String sql = "select * from movies";
-       
+		String sql = "select * from movies";
 
 		try {
+			connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -38,17 +37,8 @@ public class DataGetter {
 			ps.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} finally {
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-				}
-			}
 		}
-
 		return movies;
-
 	}
 
 }
