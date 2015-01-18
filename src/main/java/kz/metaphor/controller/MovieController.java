@@ -29,6 +29,10 @@ public class MovieController {
 		 movie2.setName("Troya");
 		 movie2.setProducer("Cameron");
 		 movies.add(movie2);
+		 Movie movie3 = new Movie();
+		 movie3.setName("Anaboliki");
+		 movie3.setProducer("Bekmambetov");
+		 movies.add(movie3);
 		 return movies;
 
 //		model.addAttribute("movie", name);
